@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using YoMarket.Data;
 
 namespace YoMarket
 {
@@ -24,6 +26,12 @@ namespace YoMarket
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            #region Db Context
+            services.AddDbContext<EshopContext>(options =>
+                options.UseSqlServer("Data Source=.;Initial Catalog=Yomarket_DB;Integrated Security=true")
+                );
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
