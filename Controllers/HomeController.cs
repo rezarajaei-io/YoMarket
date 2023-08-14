@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using YoMarket.Data;
 using YoMarket.Models;
 
 namespace YoMarket.Controllers
@@ -12,15 +13,21 @@ namespace YoMarket.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private EshopContext _context;
+        public HomeController(ILogger<HomeController> logger, EshopContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = _context.Products.ToList();
+            return View(products);
+        }
+        public IActionResult Detail()
+        {
+            return null;
         }
 
         public IActionResult Privacy()

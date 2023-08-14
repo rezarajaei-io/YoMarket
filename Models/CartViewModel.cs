@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Projects.Models;
+using YoMarket.Models;
 
 namespace YoMarket.Models
 {

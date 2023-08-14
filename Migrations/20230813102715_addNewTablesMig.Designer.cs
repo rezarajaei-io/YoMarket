@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YoMarket.Data;
 
 namespace YoMarket.Migrations
 {
     [DbContext(typeof(EshopContext))]
-    partial class EshopContextModelSnapshot : ModelSnapshot
+    [Migration("20230813102715_addNewTablesMig")]
+    partial class addNewTablesMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,7 +66,7 @@ namespace YoMarket.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("Money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("QuantityInStock")
                         .HasColumnType("int");
@@ -72,26 +74,6 @@ namespace YoMarket.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Item");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Price = 1400m,
-                            QuantityInStock = 6
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Price = 2000m,
-                            QuantityInStock = 8
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Price = 3500m,
-                            QuantityInStock = 4
-                        });
                 });
 
             modelBuilder.Entity("Projects.Models.Product", b =>
@@ -116,29 +98,6 @@ namespace YoMarket.Migrations
                         .IsUnique();
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "سوپر کراتین pnc کراتین انسولین دار شناخته میشود و حاوی گلوتامین است",
-                            ItemId = 1,
-                            Name = "سوپر کراتین pnc"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "وی صد درصد اپلاید نوتریشن دارای 90 درصد پروتئین",
-                            ItemId = 2,
-                            Name = "مکمل وی applied"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "حاوی کراتین! گینر مس 4 کیلویی ایوژن دارای نسبت پروتئین به کربو 3 به 1",
-                            ItemId = 3,
-                            Name = "گینر Super Huge"
-                        });
                 });
 
             modelBuilder.Entity("YoMarket.Models.CategoryToProduct", b =>
@@ -154,28 +113,6 @@ namespace YoMarket.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("CategoryToProducts");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            CategoryId = 1
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            CategoryId = 2
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            CategoryId = 3
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            CategoryId = 2
-                        });
                 });
 
             modelBuilder.Entity("Projects.Models.Product", b =>

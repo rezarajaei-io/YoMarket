@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Projects.Models
+namespace YoMarket.Models
 {
     public class Cart
     {

@@ -1,4 +1,4 @@
-namespace Projects.Models
+namespace YoMarket.Models
 {
     public class CartItem
     {
