@@ -15,6 +15,7 @@ namespace YoMarket.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private EshopContext _context;
+        private static Cart _cart = new Cart();
         public HomeController(ILogger<HomeController> logger, EshopContext context)
         {
             _logger = logger;
@@ -28,7 +29,7 @@ namespace YoMarket.Controllers
         }
         public IActionResult Detail(int id)
         {
-            var product = _context.Products.Include(p=>p.Item).SingleOrDefault(p=>p.Id == id);
+            var product = _context.Products.Include(p => p.Item).SingleOrDefault(p => p.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -49,7 +50,32 @@ namespace YoMarket.Controllers
         }
         public IActionResult AddToCart(int Id)
         {
-            return null;
+            var product = _context.Products.Include(p=>p.Item).SingleOrDefault(p => p.ItemId == Id);
+            if (product != null)
+            {
+                var cartItem = new CartItem()
+                {
+                    Item = product.Item,
+                    Quantity =1
+                };
+                _cart.additem(cartItem);
+
+            }
+            return RedirectToAction("ShowCart");
+        }
+        public IActionResult RemoveCart(int Id)
+        {
+            _cart.removeitem(Id);
+            return RedirectToAction("ShowCart");
+        }
+        public IActionResult ShowCart()
+        {
+            var CartVM = new CartViewModel()
+            {
+                CartItems = _cart.CartItems,
+                Order = _cart.CartItems.Sum(c => c.GetTotalPrice())
+            };
+            return View(CartVM);
         }
         public IActionResult Privacy()
         {

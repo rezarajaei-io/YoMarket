@@ -16,7 +16,7 @@ namespace YoMarket.Models
         // Add And Remove To Cart
         public void additem(CartItem item)
         {
-            if (CartItems.Exists(i=> i.Item.Id == item.Id))
+            if (CartItems.Exists(i=> i.Item.Id == item.Item.Id))
             {
                 CartItems.Find(i => i.Item.Id == item.Item.Id).Quantity += 1;
             }

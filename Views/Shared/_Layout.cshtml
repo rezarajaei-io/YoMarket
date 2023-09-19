@@ -30,9 +30,14 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        <div class="row">
+            <div class="col-md-4">
+                @await Component.InvokeAsync("ProductsGroupComponent")
+            </div>
+            <div class="col-md-8">
+                @RenderBody()
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
