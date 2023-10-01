@@ -1,0 +1,11 @@
+﻿@model Product
+
+<div class="col-4">
+    <div class="card">
+        <img src="~/images/@(Model.Id).jpg" / width="230" height="230" class="card-img-top">
+    </div>
+    <div class="card-title">@Model.Name</div>
+    <a asp-action="Detail"
+       asp-controller="Home"
+       asp-route-id="@Model.Id">مشاهده محصول</a>
+</div>

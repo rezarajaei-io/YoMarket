@@ -10,15 +10,7 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-4">
-                <div class="card">
-                    <img src="~/images/@(item.Id).jpg" / width="230" height="230" class="card-img-top">
-                </div>
-                <div class="card-title">@item.Name</div>
-                <a asp-action="Detail"
-                   asp-controller="Home"
-                   asp-route-id="@item.Id">مشاهده محصول</a>
-            </div>
+           <partial name="_BoxProduct" model="@item" />
         }
     </div>
  </div>
