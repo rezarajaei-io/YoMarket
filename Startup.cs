@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using YoMarket.Data;
+using YoMarket.Data.Repository;
 
 namespace YoMarket
 {
@@ -27,11 +28,18 @@ namespace YoMarket
         {
             services.AddControllersWithViews();
 
+         
+
             #region Db Context
             services.AddDbContext<EshopContext>(options =>
                 options.UseSqlServer("Data Source=.;Initial Catalog=Yomarket_DB;Integrated Security=true")
                 );
             #endregion
+
+            #region IoC
+            services.AddScoped<IGroupRepository, GroupRepository>();
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
