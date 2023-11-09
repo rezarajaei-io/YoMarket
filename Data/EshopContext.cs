@@ -18,10 +18,11 @@ namespace YoMarket.Data
         public DbSet<CategoryToProduct> CategoryToProducts { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Item> Item { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
 
-       
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CategoryToProduct>().HasKey(k => new { k.ProductId, k.CategoryId });
