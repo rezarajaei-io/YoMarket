@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +29,7 @@ namespace YoMarket
         {
             services.AddControllersWithViews();
 
-         
+
 
             #region Db Context
             services.AddDbContext<EshopContext>(options =>
@@ -38,8 +39,19 @@ namespace YoMarket
 
             #region IoC
             services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             #endregion
 
+            #region Authentication
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.LoginPath = "/Account/Login";
+                    option.LogoutPath = "/Account/Logout";
+                    option.ExpireTimeSpan = TimeSpan.FromDays(15);
+                }
+                );
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +72,7 @@ namespace YoMarket
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\genius\\Documents\\Development\\YoMarket\\YoMarket.csproj": {}
+    "C:\\Users\\zaeri\\Documents\\rezarajaei\\YoMarket\\YoMarket.csproj": {}
   },
   "projects": {
-    "C:\\Users\\genius\\Documents\\Development\\YoMarket\\YoMarket.csproj": {
+    "C:\\Users\\zaeri\\Documents\\rezarajaei\\YoMarket\\YoMarket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\genius\\Documents\\Development\\YoMarket\\YoMarket.csproj",
+        "projectUniqueName": "C:\\Users\\zaeri\\Documents\\rezarajaei\\YoMarket\\YoMarket.csproj",
         "projectName": "YoMarket",
-        "projectPath": "C:\\Users\\genius\\Documents\\Development\\YoMarket\\YoMarket.csproj",
-        "packagesPath": "C:\\Users\\genius\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\genius\\Documents\\Development\\YoMarket\\obj\\",
+        "projectPath": "C:\\Users\\zaeri\\Documents\\rezarajaei\\YoMarket\\YoMarket.csproj",
+        "packagesPath": "C:\\Users\\zaeri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\zaeri\\Documents\\rezarajaei\\YoMarket\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\genius\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\zaeri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -79,7 +75,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -91,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

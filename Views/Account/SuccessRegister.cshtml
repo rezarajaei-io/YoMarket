@@ -1,0 +1,14 @@
+﻿@model AccountingViewModel
+@{
+    ViewData["Title"] = "SuccessRegister";
+}
+
+<h1>ثبت نام با موفقیت انجام شد!</h1>
+<div class="alert alert-success">
+    <p>کاربر عزیز @Model.Email از ثبت نام شما انجام شد از طریق لینک زیر میتوانید وارد حساب کاربری خود شوید</p>
+    <p>
+        <a asp-controller="Account" asp-action="Login">ورود به سایت</a>
+    </p>
+   
+</div>
+
