@@ -19,6 +19,8 @@ namespace YoMarket.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Item> Item { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetail> OrderDeatail { get; set; }
 
 
 

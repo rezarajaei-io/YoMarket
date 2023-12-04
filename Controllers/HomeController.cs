@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -48,34 +50,70 @@ namespace YoMarket.Controllers
             };
             return View(vm);
         }
+        [Authorize]
         public IActionResult AddToCart(int Id)
         {
-            var product = _context.Products.Include(p=>p.Item).SingleOrDefault(p => p.ItemId == Id);
+            var product = _context.Products.Include(p => p.Item).SingleOrDefault(p => p.ItemId == Id);
             if (product != null)
             {
-                var cartItem = new CartItem()
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString());
+                var order = _context.Order.FirstOrDefault(o => o.UserId == userId && !o.IsFinaly);
+                if (order != null)
                 {
-                    Item = product.Item,
-                    Quantity =1
-                };
-                _cart.additem(cartItem);
-
+                    var orderDetail = _context.OrderDeatail.FirstOrDefault(d => d.OrderId == order.OrderId && d.ProductId == product.Id);
+                    if (orderDetail != null)
+                    {
+                        orderDetail.Count += 1;
+                    }
+                    else
+                    {
+                        _context.OrderDeatail.Add(new OrderDetail()
+                        {
+                            OrderId = order.OrderId,
+                            ProductId = product.Id,
+                            Price = product.Item.Price,
+                            Count = 1,
+                        });
+                    }
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    order = new Order()
+                    {
+                        IsFinaly = false,
+                        CreatedDate = DateTime.Now,
+                        UserId = userId
+                    };
+                    _context.Order.Add(order);
+                    
+                    _context.OrderDeatail.Add(new OrderDetail()
+                    {
+                        OrderId = order.OrderId,
+                        ProductId = product.Id,
+                        Price = product.Item.Price,
+                        Count = 1
+                    });
+                    _context.SaveChanges();
+                }
             }
             return RedirectToAction("ShowCart");
         }
-        public IActionResult RemoveCart(int Id)
+        public IActionResult RemoveCart(int DetailId)
         {
-            _cart.removeitem(Id);
+            var orderDetail = _context.OrderDeatail.Find(DetailId);
+            _context.Remove(orderDetail);
+            _context.SaveChanges();
             return RedirectToAction("ShowCart");
         }
+        [Authorize]
         public IActionResult ShowCart()
         {
-            var CartVM = new CartViewModel()
-            {
-                CartItems = _cart.CartItems,
-                Order = _cart.CartItems.Sum(c => c.GetTotalPrice())
-            };
-            return View(CartVM);
+           int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString());
+            var order = _context.Order.Where(o => o.UserId == userId && !o.IsFinaly)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(p => p.Product).FirstOrDefault();
+            return View(order);
         }
         public IActionResult Privacy()
         {
