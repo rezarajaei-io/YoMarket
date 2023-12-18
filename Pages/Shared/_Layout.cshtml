@@ -1,18 +1,21 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html dir="rtl">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
     <link href="~/css/admin.css" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
 </head>
-<body dir="rtl">
+<body>
     <header>
         <a href="/">Admin</a>
 
     </header>
-    <div class="container">
-
+    <div class="row">
+        <div class="col-md-2">
         <nav>
             <ul>
                 <li>
@@ -20,9 +23,10 @@
                 </li>
             </ul>
         </nav>
-        <main>
+        </div>
+        <div class ="col-md-10">
             @RenderBody()
-        </main>
+        </div>
 
     </div>
 </body>
