@@ -1,0 +1,42 @@
+﻿@page
+@model YoMarket.Pages.Admin.DeleteModel
+@{
+
+    ViewData["Title"] = "Delete";
+}
+
+<h1>حذف کالا</h1>
+<form method="post">
+
+    <dl class="dl-horizontal">
+        <dl>
+            <dd><label asp-for="Product.Name"></label></dd>
+
+        </dl>
+        <dt>
+            <input asp-for="Product.Name" class="form-control" readonly/>
+            <span asp-validation-for="Product.Name"></span>
+        </dt>
+
+        <dl>
+            <dd><label asp-for="Product.Description"></label></dd>
+
+        </dl>
+        <dt>
+            <textarea class="form-control" asp-for="Product.Description" readonly> </textarea>
+            <span asp-validation-for="Product.Description"></span>
+        </dt>
+
+        <dl>
+            <dd><label>تصویر</label></dd>
+
+        </dl>
+        <dt>
+            <img src="/images/@(Model.Product.Id).jpg" style="max-width:200px" />
+        </dt>
+        <dt>
+            <input type="hidden" asp-for="Product.Id" />
+            <input type="submit" class="btn btn-success" value="ثبت" />
+        </dt>
+    </dl>
+</form>
